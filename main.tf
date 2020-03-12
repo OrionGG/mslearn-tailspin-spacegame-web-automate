@@ -75,7 +75,7 @@ output "website_hostname_dev" {
 }
 
 resource "azurerm_storage_account" "spacegame" {
-  name                     = "sa-${random_integer.app_service_name_suffix.result}"
+  name                     = "sa${random_integer.app_service_name_suffix.result}"
   location            = "${azurerm_resource_group.spacegame.location}"
   resource_group_name = "${azurerm_resource_group.spacegame.name}"
   account_tier             = "Standard"
