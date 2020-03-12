@@ -73,3 +73,20 @@ output "website_hostname_dev" {
   value       = "${azurerm_app_service.spacegame_dev.default_site_hostname}"
   description = "The hostname of the website in the dev environment"
 }
+
+resource "azurerm_storage_account" "spacegame" {
+  name                     = "sa-${random_integer.app_service_name_suffix.result}"
+  location            = "${azurerm_resource_group.spacegame.location}"
+  resource_group_name = "${azurerm_resource_group.spacegame.name}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_function_app" "spacegame_dev" {
+  name                = "test-terraform-function-dev-${random_integer.app_service_name_suffix.result}"
+  location            = "${azurerm_resource_group.spacegame.location}"
+  resource_group_name = "${azurerm_resource_group.spacegame.name}"
+  app_service_plan_id = "${azurerm_app_service_plan.spacegame.id}"
+
+}
+
