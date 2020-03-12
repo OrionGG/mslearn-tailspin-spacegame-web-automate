@@ -87,6 +87,7 @@ resource "azurerm_function_app" "spacegame_dev" {
   location            = "${azurerm_resource_group.spacegame.location}"
   resource_group_name = "${azurerm_resource_group.spacegame.name}"
   app_service_plan_id = "${azurerm_app_service_plan.spacegame.id}"
+  storage_connection_string = "${azurerm_storage_account.spacegame.primary_connection_string}"
 
 }
 
